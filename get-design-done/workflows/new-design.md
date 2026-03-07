@@ -42,29 +42,132 @@ If Paper is detected, call `mcp__paper__get_basic_info` to learn:
 
 ---
 
-## Phase 2: Deep Questioning
+## Phase 2: Structured Questioning
 
-Load the questioning guide:
+Load the questioning guide for translation context:
 ```
 Read {{GDD_ROOT}}/references/design-questioning.md
 ```
 
-Conduct an interactive conversation to understand:
+Use the `AskUserQuestion` tool to collect design preferences through structured questions. The user selects from predefined options — "Other" is always available for custom input.
 
-1. **Product Identity**: What they're building, who it's for, what it does
-2. **Visual Warmth**: Warm/approachable vs. precise/professional
-3. **Density**: Spacious vs. information-dense
-4. **Color Confidence**: Bold accent vs. quiet minimal
-5. **Typography Feel**: Modern vs. classic vs. technical
-6. **Complexity**: Number of screens, platform, data complexity
+### Batch 1: Identity & Direction
 
-Use the questioning techniques from the reference:
-- **Comparison technique**: "More like Notion or Linear?"
-- **Three-option technique**: Offer three concrete choices, not binary
-- **"What annoys you" technique**: What designs do they dislike?
-- **Priority triangle**: Rank: impressive, easy to use, ships fast
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "Which product's visual style feels closest to what you're building?",
+      header: "Style ref",
+      options: [
+        { label: "Linear", description: "Precise, minimal, dev-focused. Clean dark/light modes with sharp typography." },
+        { label: "Notion", description: "Warm, approachable, flexible. Friendly with lots of white space." },
+        { label: "Stripe", description: "Premium, polished, editorial. Rich gradients and confident typography." },
+        { label: "Vercel", description: "Technical, stark, high-contrast. Developer-centric with monospace touches." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "How should your product feel?",
+      header: "Warmth",
+      options: [
+        { label: "Precise & professional", description: "Sharp edges, high contrast, cool neutrals. Think: steel and glass." },
+        { label: "Warm & approachable", description: "Rounded corners, soft colors, warm neutrals. Think: wooden furniture." },
+        { label: "Editorial & bold", description: "Dramatic typography, high contrast, strong visual personality. Think: design magazine." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "What matters most for this design?",
+      header: "Priority",
+      options: [
+        { label: "Looks impressive", description: "Should wow and capture attention at first glance." },
+        { label: "Easy to understand", description: "Clarity and usability are the top priority." },
+        { label: "Feels professional", description: "Should convey trust, credibility, and authority." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "What typography direction feels right?",
+      header: "Typography",
+      options: [
+        { label: "Modern & clean", description: "Geometric sans-serif like Inter, Geist, or SF Pro." },
+        { label: "Classic & editorial", description: "Serif or humanist sans like Source Serif, Literata, or Lora." },
+        { label: "Technical", description: "Monospace-influenced like JetBrains Mono or IBM Plex Mono." },
+        { label: "Expressive & bold", description: "Display fonts with personality like Cabinet Grotesk or Fraunces." }
+      ],
+      multiSelect: false
+    }
+  ]
+})
+```
 
-**Gate**: When you have confident answers for product personality, color direction, typography feel, platform, and at least 2 visual references — proceed to synthesis.
+### Batch 2: Visual Details & Scope
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "How should color be used in the design?",
+      header: "Color",
+      options: [
+        { label: "One bold accent", description: "Neutral palette with one strong, intentional color moment." },
+        { label: "Quiet & minimal", description: "Mostly neutrals, color appears sparingly and subtly." },
+        { label: "Rich & expressive", description: "Multiple harmonious colors creating a vivid, energetic feel." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "How spacious should the design feel?",
+      header: "Density",
+      options: [
+        { label: "Spacious", description: "Generous white space, large type, focus on one thing at a time." },
+        { label: "Balanced", description: "Standard spacing, clear sections, comfortable density." },
+        { label: "Dense & information-rich", description: "Compact, lots visible at once. Like a dashboard or data tool." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "What's the primary platform?",
+      header: "Platform",
+      options: [
+        { label: "Desktop-first", description: "1440px wide, optimized for large screens." },
+        { label: "Mobile-first", description: "375px wide, thumb-friendly, progressive disclosure." },
+        { label: "Responsive (both)", description: "Must work well on all screen sizes." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "Which visual trends do you want to avoid?",
+      header: "Avoid",
+      options: [
+        { label: "SaaS gradient look", description: "Purple/indigo on dark navy. The 2019-2024 startup aesthetic." },
+        { label: "Generic startup feel", description: "Illustration-heavy, pastel colors, rounded everything." },
+        { label: "Too minimal/empty", description: "So stripped down it feels incomplete or lifeless." },
+        { label: "Too corporate", description: "Stiff, formal, blue-heavy enterprise aesthetic." }
+      ],
+      multiSelect: true
+    }
+  ]
+})
+```
+
+### Processing Answers
+
+Use the questioning guide's **Translation guide** sections to convert selections into concrete design decisions:
+
+| Selection | Maps to |
+|-----------|---------|
+| Style reference | Overall tone, visual benchmarks |
+| Warmth | Color temperature, border radius, shadow softness |
+| Priority | Trade-off decisions throughout the design |
+| Typography | Font family search direction |
+| Color | Accent strategy and palette approach |
+| Density | Spacing scale (4px vs 8px base) |
+| Platform | Artboard sizes and layout strategy |
+| Avoid | Explicit constraints for the design system |
+
+**Gate**: Proceed to brief synthesis when both batches are answered. If the user selected "Other" for critical questions (Style ref, Warmth, Typography), ask one follow-up `AskUserQuestion` to clarify their custom input.
 
 ---
 
@@ -81,15 +184,44 @@ The agent synthesizes answers into structured BRIEF.md.
 
 ## Phase 4: Workflow Configuration
 
-Ask the user to configure preferences:
+Use `AskUserQuestion` to configure workflow preferences:
 
-1. **Mode**: Interactive (confirm each step) or Express (auto-approve after initial questions)
-2. **Agents**: Enable/disable optional agents:
-   - Researcher (explores patterns and competitors)
-   - Moodboard (collects visual references)
-   - Critic (reviews rendered designs)
-   - Accessibility checker
-3. **Color scheme preference**: Light mode (default) or dark mode
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "How do you want to work through the design phases?",
+      header: "Mode",
+      options: [
+        { label: "Interactive", description: "Confirm each step before proceeding. More control, more involvement." },
+        { label: "Express (Recommended)", description: "Auto-proceed after initial questions. Faster, less interruptions." }
+      ],
+      multiSelect: false
+    },
+    {
+      question: "Which optional agents should be enabled?",
+      header: "Agents",
+      options: [
+        { label: "Researcher", description: "Explores UI patterns and competitor visual analysis." },
+        { label: "Moodboard", description: "Collects visual references and synthesizes mood direction." },
+        { label: "Critic", description: "Structured design review after each rendered phase." },
+        { label: "Accessibility", description: "WCAG AA compliance checks on rendered designs." }
+      ],
+      multiSelect: true
+    },
+    {
+      question: "What color scheme for the designs?",
+      header: "Scheme",
+      options: [
+        { label: "Light mode (Recommended)", description: "Light backgrounds, dark text. Classic and safe default." },
+        { label: "Dark mode", description: "Dark backgrounds, light text. Modern, dramatic feel." },
+        { label: "Both", description: "Design system supports both. More work, more complete." }
+      ],
+      multiSelect: false
+    }
+  ]
+})
+```
 
 Store in `.design/config.json`.
 
