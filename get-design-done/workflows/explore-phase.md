@@ -37,21 +37,128 @@ The goal is to understand how the user envisions this specific phase. Use concre
 
 ### For Phase 1 (Design System)
 
-Ask about:
-1. **Color temperature**: "Should the palette feel warm (cream, sand tones) or cool (slate, blue-gray)?"
-2. **Accent color**: "Do you have a color in mind for buttons and links? Even a vague direction — 'something blue' — is helpful."
-3. **Typography**: "Should the text feel modern and clean (like a tech product) or warm and readable (like a blog)?"
-4. **Density**: "More breathing room (like Apple) or more packed with info (like a dashboard)?"
-5. **Roundedness**: "Sharp corners (like Linear) or rounded corners (like Notion)?"
+Use `AskUserQuestion` to collect design system preferences:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "Should the color palette feel warm or cool?",
+      header: "Temperature",
+      multiSelect: false,
+      options: [
+        { label: "Cool", description: "Slate, blue-gray tones. Like Linear or Vercel." },
+        { label: "Warm", description: "Cream, sand, earthy tones. Like Notion or Basecamp." },
+        { label: "Neutral", description: "True gray, no color cast. Like GitHub." }
+      ]
+    },
+    {
+      question: "What accent color direction for buttons and links?",
+      header: "Accent",
+      multiSelect: false,
+      options: [
+        { label: "Blue", description: "Trust, stability, technology. The safe default." },
+        { label: "Red / Vermillion", description: "Bold, warm, energetic. Stands out on neutral palettes." },
+        { label: "Green / Teal", description: "Calm, modern, growth. Good for tools and productivity." },
+        { label: "No preference", description: "Let the system architect decide based on the brief." }
+      ]
+    },
+    {
+      question: "How should the corners and overall shape feel?",
+      header: "Shape",
+      multiSelect: false,
+      options: [
+        { label: "Sharp (2-4px radius)", description: "Precise, technical, editorial. Like Linear." },
+        { label: "Moderate (6-8px radius)", description: "Balanced, modern default. Like Stripe." },
+        { label: "Rounded (12-16px radius)", description: "Soft, friendly, approachable. Like Notion." }
+      ]
+    }
+  ]
+})
+```
+
+Then ask a follow-up about density and typography if not already covered in BRIEF.md:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "How much breathing room should the designs have?",
+      header: "Density",
+      multiSelect: false,
+      options: [
+        { label: "Spacious", description: "Generous white space, like Apple or a luxury brand." },
+        { label: "Balanced", description: "Standard spacing. Comfortable for most products." },
+        { label: "Dense", description: "Information-rich, compact. Like a dashboard or IDE." }
+      ]
+    }
+  ]
+})
+```
 
 ### For Other Phases
 
-Ask about:
-1. **Layout**: "How do you picture this screen laid out? Sidebar? Single column? Grid of cards?"
-2. **Priority**: "What's the most important thing the user should see first on this screen?"
-3. **Reference**: "Any specific product or screenshot that's close to what you imagine?"
-4. **Boundaries**: "What should this phase NOT try to do?"
-5. **Interaction**: "Any specific interactions? Hover effects, animations, expandable sections?"
+Use `AskUserQuestion` to collect phase-specific preferences:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "How do you picture this screen laid out?",
+      header: "Layout",
+      multiSelect: false,
+      options: [
+        { label: "Single column", description: "Centered content, focused reading flow." },
+        { label: "Two columns", description: "Sidebar + content, or split layout." },
+        { label: "Grid of cards", description: "Repeating card layout for collections." },
+        { label: "Not sure", description: "Let the specifier decide based on content." }
+      ]
+    },
+    {
+      question: "What's the most important thing the user should see first?",
+      header: "Priority",
+      multiSelect: false,
+      options: [
+        { label: "A headline / value prop", description: "Text-first: communicate the message immediately." },
+        { label: "A visual / image", description: "Visual-first: show don't tell." },
+        { label: "A CTA / action", description: "Action-first: get the user to do something." },
+        { label: "Data / content", description: "Content-first: let the information speak." }
+      ]
+    },
+    {
+      question: "What should this phase NOT try to do?",
+      header: "Boundaries",
+      multiSelect: true,
+      options: [
+        { label: "No animations / interactions", description: "Keep it static for now." },
+        { label: "No responsive variants", description: "Desktop only, mobile comes later." },
+        { label: "No dark mode variant", description: "Light mode only for this phase." },
+        { label: "No edge cases", description: "Happy path only, no empty/error states." }
+      ]
+    }
+  ]
+})
+```
+
+Optionally, ask about visual references if the user might have them:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "Any product or site whose design feels close to what you imagine?",
+      header: "Reference",
+      multiSelect: false,
+      options: [
+        { label: "Linear", description: "Minimal, precise, dev-focused." },
+        { label: "Stripe", description: "Premium, polished, editorial." },
+        { label: "Notion", description: "Friendly, clean, flexible." },
+        { label: "No reference", description: "Start fresh without a benchmark." }
+      ]
+    }
+  ]
+})
+```
 
 ---
 

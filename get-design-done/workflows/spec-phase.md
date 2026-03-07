@@ -74,13 +74,92 @@ The specifier creates a detailed spec with:
 
 ## Gate
 
-Before writing the spec, present a summary to the user:
-- Layout approach
-- Key components
-- Token usage
-- Any assumptions made
+In express mode, proceed automatically. In interactive mode, present the spec's key decisions to the user via `AskUserQuestion` before writing the final SPEC.md.
 
-In interactive mode, ask for approval. In express mode, proceed automatically.
+The questions should be tailored to the phase content. Build 2-4 questions covering the most impactful design decisions, each with 2-4 concrete options (including previews where layout choices benefit from ASCII mockups).
+
+### Example: Landing Page Hero Phase
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "What layout do you prefer for the hero?",
+      header: "Layout",
+      multiSelect: false,
+      options: [
+        { label: "Asymmetric", description: "Text left (60%), visual right (40%). Editorial style.", preview: "ASCII mockup..." },
+        { label: "Centered", description: "All content centered in a single column.", preview: "ASCII mockup..." }
+      ]
+    },
+    {
+      question: "Which headline do you prefer?",
+      header: "Headline",
+      multiSelect: false,
+      options: [
+        { label: "Option A", description: "Emphasizes the input method." },
+        { label: "Option B", description: "Emphasizes the output." }
+      ]
+    },
+    {
+      question: "What visual element should accompany the text?",
+      header: "Visual",
+      multiSelect: false,
+      options: [
+        { label: "Terminal mockup", description: "Shows CLI in action. Signals dev tool." },
+        { label: "Workflow diagram", description: "Visual pipeline: Brief → Tokens → Render." },
+        { label: "No visual", description: "Pure typography. Maximum minimalism." }
+      ]
+    },
+    {
+      question: "What CTA style do you prefer?",
+      header: "CTA",
+      multiSelect: false,
+      options: [
+        { label: "Button", description: "Classic accent-colored button." },
+        { label: "Install command", description: "Copyable npm install pill." }
+      ]
+    }
+  ]
+})
+```
+
+### Example: Design System Phase 1
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "What color temperature for the neutral palette?",
+      header: "Temperature",
+      multiSelect: false,
+      options: [
+        { label: "Cool", description: "Slate, blue-gray undertones." },
+        { label: "Warm", description: "Sand, cream undertones." },
+        { label: "Neutral", description: "True gray, no color cast." }
+      ]
+    },
+    {
+      question: "What type scale ratio feels right?",
+      header: "Scale",
+      multiSelect: false,
+      options: [
+        { label: "Major Third (1.250)", description: "Balanced default. Good for most UIs." },
+        { label: "Perfect Fourth (1.333)", description: "Clear hierarchy. Good for content-heavy pages." },
+        { label: "Perfect Fifth (1.500)", description: "Dramatic contrast. Good for editorial." }
+      ]
+    }
+  ]
+})
+```
+
+### Guidelines for Gate Questions
+
+- **2-4 questions max** — focus on decisions with the biggest visual impact
+- **Use previews** for layout/composition choices (ASCII mockups)
+- **Offer concrete options**, not abstract preferences — show the actual headline text, the actual layout structure
+- **Include a recommended option** as first choice when there's a clear best default
+- After user answers, incorporate their choices into the spec before writing
 
 ---
 

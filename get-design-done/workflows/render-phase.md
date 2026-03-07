@@ -43,7 +43,25 @@ If adapter is "generic": All rendering goes to RENDERED.md as HTML/CSS
 Before rendering any text:
 1. Read the type scale from TOKENS.md
 2. Use `check_font` (via adapter) to verify the primary font family is available
-3. If not available, suggest alternatives and ask the user
+3. If not available, use `AskUserQuestion` to let the user choose an alternative:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "The font \"[Font Name]\" isn't available. Which alternative should we use?",
+      header: "Font",
+      multiSelect: false,
+      options: [
+        { label: "[Alternative 1]", description: "Most similar style and weight range." },
+        { label: "[Alternative 2]", description: "Available on the system, good fallback." },
+        { label: "[Alternative 3]", description: "Different character but verified available." }
+      ]
+    }
+  ]
+})
+```
+
 4. Check that required weights are available
 
 ### Step 3: Create Surface

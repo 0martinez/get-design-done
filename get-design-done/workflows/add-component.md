@@ -24,7 +24,25 @@ Add a new component pattern to the design system.
 5. Append to system/COMPONENTS.md
 6. Optionally add to TOKENS.md if new tokens are needed
 
-7. Show the component definition and ask for approval
+7. Show the component definition and ask for approval via `AskUserQuestion`:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "The [Component] definition is ready. How should we proceed?",
+      header: "Approval",
+      multiSelect: false,
+      options: [
+        { label: "Approve & save", description: "Add the component to COMPONENTS.md as defined." },
+        { label: "Adjust variants", description: "Modify the variants (e.g., add/remove primary, ghost, etc.)." },
+        { label: "Adjust sizing", description: "Change the size scale (heights, padding, font sizes)." },
+        { label: "Start over", description: "Discard and redefine the component from scratch." }
+      ]
+    }
+  ]
+})
+```
 
 ## Output
 

@@ -21,7 +21,23 @@ This returns paths to:
 - `gddRoot` — GDD framework installation path
 - `referencesDir`, `templatesDir`, `adaptersDir`
 
-If `exists` is true, warn the user and ask whether to continue (will overwrite) or abort.
+If `exists` is true, use `AskUserQuestion` to confirm:
+
+```tool
+AskUserQuestion({
+  questions: [
+    {
+      question: "A .design/ directory already exists. What should we do?",
+      header: "Overwrite",
+      multiSelect: false,
+      options: [
+        { label: "Overwrite", description: "Delete existing .design/ and start fresh." },
+        { label: "Abort", description: "Keep the existing project and cancel initialization." }
+      ]
+    }
+  ]
+})
+```
 
 ---
 
