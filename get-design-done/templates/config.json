@@ -1,0 +1,18 @@
+{
+  "version": "0.1.0",
+  "adapter": null,
+  "preferences": {
+    "color_scheme": "light",
+    "commit_docs": true,
+    "search_gitignored": false
+  },
+  "workflow": {
+    "mode": "interactive",
+    "agents": {
+      "researcher": true,
+      "moodboard": true,
+      "critic": true,
+      "accessibility": true
+    }
+  }
+}
