@@ -13,6 +13,7 @@ Execute the design specification in the connected design tool (or generate HTML/
 - Phase SPEC.md must exist
 - TOKENS.md must exist
 - Adapter must be configured in config.json
+- Recommended: Run /clear before starting to maximize available context for rendering
 
 ## Initialization
 

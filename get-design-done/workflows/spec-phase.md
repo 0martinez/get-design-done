@@ -183,4 +183,5 @@ Spec: .design/phases/NN-name/SPEC.md
 {{IF PHASE 1: Tokens: .design/TOKENS.md}}
 
 Next: /gdd:render-phase {{PHASE_NUM}}    (execute the design)
+Tip: Run /clear to free up context before rendering.
 ```
