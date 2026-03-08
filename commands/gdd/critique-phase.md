@@ -20,4 +20,5 @@ Evaluates the design against 8 dimensions: visual hierarchy, design system consi
 ## Next Steps
 
 If the critique passes, proceed to the next phase with `/gdd:explore-phase <N+1>`.
-If revision is needed, fix issues and re-render with `/gdd:render-phase <N>`.
+If revision is needed, the workflow will offer to apply fixes automatically —
+select which ones to apply and they'll be executed in place.

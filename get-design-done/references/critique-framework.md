@@ -141,10 +141,25 @@ Critique is not personal. It evaluates the design against its stated goals and d
 
 ## Issues Table
 
-| # | Severity | Category | Description | Fix |
-|---|----------|----------|-------------|-----|
-| 1 | critical | contrast | Body text at 3.2:1 ratio | Darken text-secondary to #555 |
+| # | Severity | Category | Fix Type | Description | Fix |
+|---|----------|----------|----------|-------------|-----|
+| 1 | critical | contrast | token-fix | Body text at 3.2:1 ratio | Darken text-secondary to #555 |
 ```
+
+---
+
+## Fix Types
+
+Every issue must include a Fix Type to enable automated fix application.
+
+| Fix Type | Meaning | Automated? | Example |
+|----------|---------|------------|---------|
+| `token-fix` | Update/add a value in TOKENS.md | Yes | "Add code font token", "Darken text-secondary" |
+| `render-fix` | Update styles on rendered nodes via design tool | Yes | "Increase contrast on element", "Add border" |
+| `spec-fix` | Requires SPEC.md changes and re-rendering | No (flagged) | "Restructure layout", "Add missing section" |
+| `note` | Informational, no action needed | No | "Consider for future iteration" |
+
+Classification rule: if the change should propagate to all future uses → token-fix. If it's a one-off rendered element adjustment → render-fix.
 
 ---
 

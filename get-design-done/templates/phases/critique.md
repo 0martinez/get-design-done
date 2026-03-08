@@ -48,8 +48,8 @@ generated: {{TIMESTAMP}}
 
 ## Issues
 
-| # | Severity | Category | Description | Suggested Fix |
-|---|----------|----------|-------------|---------------|
+| # | Severity | Category | Fix Type | Description | Suggested Fix |
+|---|----------|----------|----------|-------------|---------------|
 {{ISSUES_TABLE}}
 
 ## Severity Guide

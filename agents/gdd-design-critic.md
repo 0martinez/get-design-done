@@ -49,7 +49,7 @@ You will receive paths to:
    - Note specific observations
    - Suggest fixes for issues
 
-8. Compile issues into a prioritized table
+8. Compile issues into a prioritized table, classifying each with a Fix Type (token-fix, render-fix, spec-fix, or note) per the critique framework
 9. Calculate token compliance score
 10. Assign overall grade (A/B/C/D)
 11. Write CRITIQUE.md
@@ -69,11 +69,19 @@ You will receive paths to:
 - **D**: Multiple critical issues. Fundamental problems need addressing.
 </grading_rubric>
 
+<fix_type_rules>
+Classify every issue:
+- **token-fix**: Modifies/adds a value in TOKENS.md
+- **render-fix**: Changes styling on existing rendered nodes (via update_styles, update_text)
+- **spec-fix**: Requires structural changes needing re-specification
+- **note**: No action needed now
+</fix_type_rules>
+
 <output_format>
 Write CRITIQUE.md using the critique template. Include:
 1. Overall grade and one-sentence summary
 2. Per-dimension evaluation with severity
-3. Issues table (prioritized by severity)
+3. Issues table (prioritized by severity, each classified with a Fix Type)
 4. Token compliance score
 5. Verdict: "proceed" / "revise and re-render" / "major revision needed"
 </output_format>

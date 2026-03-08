@@ -69,23 +69,72 @@ Update STATE.md:
 
 ## Post-Critique Actions
 
-Based on the verdict:
+Parse the CRITIQUE.md issues table. Check for the Fix Type column — if the column is missing (legacy format), fall back to the original behavior below each path.
 
-**Proceed**: Phase is complete. Suggest next phase.
+Based on the verdict and available fixes:
+
+### Path A — Proceed (no actionable fixes)
+
+Grade A or verdict=proceed with no token-fix/render-fix issues.
+
 ```
 Phase {{PHASE_NUM}} critique: Grade [X] — [verdict]
 Next: /gdd:explore-phase {{NEXT_PHASE}}
 ```
 
-**Revise**: Issues found that need fixing.
-```
-Phase {{PHASE_NUM}} critique: Grade [X] — revision needed
-[N] issues found ([critical], [major], [minor])
+### Path B — Fixable issues exist
 
-Fix the issues, then re-render: /gdd:render-phase {{PHASE_NUM}}
+Issues with Fix Type `token-fix` or `render-fix` are present.
+
+Present an interactive selection using AskUserQuestion:
+
+```
+AskUserQuestion({
+  questions: [{
+    question: "The critique found fixable issues. Which should I apply now?",
+    header: "Apply Fixes",
+    multiSelect: true,
+    options: [
+      { label: "[token] #N: short description", description: "severity — category — what changes" },
+      { label: "[render] #N: short description", description: "severity — category — what changes" },
+      ...
+      { label: "Skip all — I'll handle these manually", description: "" }
+    ]
+  }]
+})
 ```
 
-**Major revision**: Fundamental problems.
+Build the options list from the issues table. Prefix each label with `[token]` or `[render]` matching its Fix Type. Always include "Skip all" as the final option. Omit `spec-fix` and `note` issues from the selection (mention them as informational after).
+
+**Applying selected fixes — execution order**:
+
+1. **Token fixes first** (changes may cascade and make some render fixes unnecessary):
+   - Read TOKENS.md
+   - Apply the change (update value, add new token, etc.)
+   - Write TOKENS.md
+   - Warn about cascade: "Token updated — other rendered phases using this token may need re-rendering"
+
+2. **Render fixes second**:
+   - Use the adapter's MCP tools (update_styles / set_text_content) to apply the change
+   - Take a screenshot to verify the fix visually
+
+3. **Spec fixes**: Do not auto-apply. After fix execution, flag them:
+   ```
+   Spec-level issues (manual): re-specify with /gdd:spec-phase {{PHASE_NUM}}
+   ```
+
+4. **After all selected fixes are applied**:
+   - Update STATE.md with fix log (which fixes applied, which skipped)
+   - Take a final screenshot if render fixes were applied
+   - Suggest next action:
+     - If only token fixes applied → "Re-render to pick up token changes: /gdd:render-phase {{PHASE_NUM}}"
+     - If render fixes applied → "Re-critique to verify: /gdd:critique-phase {{PHASE_NUM}}"
+     - If all issues resolved → "Proceed to next phase: /gdd:explore-phase {{NEXT_PHASE}}"
+
+### Path C — Major revision needed
+
+Grade D or verdict=major revision.
+
 ```
 Phase {{PHASE_NUM}} critique: Grade [X] — major revision needed
 Re-specify the phase: /gdd:spec-phase {{PHASE_NUM}}
