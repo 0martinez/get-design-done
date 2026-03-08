@@ -2,25 +2,25 @@
 
 [![npm](https://img.shields.io/npm/v/get-design-done)](https://www.npmjs.com/package/get-design-done)
 
-Spec-driven design systems for [Claude Code](https://claude.ai/claude-code).
+Spec-driven design for [Claude Code](https://claude.ai/claude-code).
 
-Design systems without design expertise — GDD asks the questions a designer would ask, then builds it for you.
+A system of design-expert agents that lets software engineers produce complex, production-quality designs — from design systems to full screens — without needing design expertise themselves.
 
 <!-- TODO: Add demo GIF or screenshot here -->
 
 ## The Problem
 
-You're building a product. You need a design system — colors, typography, spacing, components. You don't have a designer, and design tools assume you already know what you want.
+You're a software engineer. You can build anything, but designing it well is a different skill. You know enough to have taste, but not enough to execute confidently — and design tools assume you already have the expertise.
 
 ## The Approach
 
-GDD treats design specs as executable blueprints. Your answers to concrete questions become a brief. The brief becomes tokens. Tokens become specs. Specs render deterministic, compliant designs.
+GDD gives you a team of specialized agents that carry the design knowledge you don't have. They ask the right questions using visual comparisons you can answer, then turn your decisions into executable specs that render real designs.
 
 ```
 Brief -> Tokens -> Spec -> Render -> Critique
 ```
 
-Specs aren't documentation. They're programs that produce pixel-accurate designs, verified against the system that generated them.
+Phase 1 builds your design system. Every phase after that produces screens, components, and layouts — all grounded in that system, all spec-driven, all reviewed.
 
 ## Install
 
@@ -50,9 +50,13 @@ Then repeat `explore -> spec -> render -> critique` for each phase.
 
 ## Key Concepts
 
+### Design-expert agents, not templates
+
+GDD isn't a component library or a starter kit. It's a system of agents that carry deep design knowledge — color theory, typography, spacing, layout, accessibility. They know how to frame questions so engineers can make good decisions without needing the vocabulary.
+
 ### Specs drive everything
 
-Specs contain token resolutions, layout instructions, and render commands. Not mood boards. Not descriptions. Executable blueprints that a render agent follows step by step.
+Every design — whether a token system, a dashboard, or a landing page — starts as a spec. Specs contain token resolutions, layout instructions, and render commands. Not mood boards. Not descriptions. Executable blueprints that a render agent follows step by step.
 
 ### Tokens as source of truth
 
@@ -60,7 +64,7 @@ Specs contain token resolutions, layout instructions, and render commands. Not m
 
 ### No design jargon
 
-Questions use visual comparisons — "More like Notion or Linear?" — not terminology. Design expertise lives in reference files that agents load behind the scenes. You make decisions; GDD handles the craft.
+Questions use visual comparisons — "More like Notion or Linear?" — not terminology. You make the decisions; the agents handle the craft.
 
 ### Structured critique
 
@@ -102,7 +106,7 @@ Adding a tool = writing one markdown file.
 Brief -> Explore -> Spec -> Render -> Critique -> (next phase)
 ```
 
-Phase 1 is always **Design System Foundation** — colors, type, spacing established before any screens.
+Phase 1 is always **Design System Foundation** — colors, type, spacing established before any screens. Subsequent phases produce actual designs: dashboards, landing pages, settings screens, whatever your product needs.
 
 ## Project Structure
 
