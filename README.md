@@ -6,7 +6,7 @@ Spec-driven design for [Claude Code](https://claude.ai/claude-code).
 
 A system of design-expert agents that lets software engineers produce complex, production-quality designs — from design systems to full screens — without needing design expertise themselves.
 
-<!-- TODO: Add demo GIF or screenshot here -->
+<!-- TODO: Add demo GIF here -->
 
 ## The Problem
 
@@ -27,6 +27,8 @@ Phase 1 builds your design system. Every phase after that produces screens, comp
 ```bash
 npx get-design-done
 ```
+
+<img src="assets/install.png" alt="GDD installer" width="600">
 
 This walks you through choosing global (`~/.claude/`, all projects) or local (`./.claude/`, this project only).
 
