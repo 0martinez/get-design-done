@@ -49,6 +49,7 @@ GDD asks concrete questions through visual comparisons — "More like Notion or 
 Adapters are markdown files mapping abstract operations to MCP tool calls. Currently supports:
 
 - **Paper** — full visual rendering on canvas
+- **Pencil** — design generation and editing in `.pen` files
 - **Generic** — HTML/CSS spec output (no design tool needed)
 
 Adding a new tool = writing one markdown file. See `get-design-done/adapters/adapter-interface.md`.
