@@ -7,15 +7,16 @@ GDD encodes expert design knowledge and guides developers through the questions 
 ## Install
 
 ```bash
-npx get-design-done --global
+npx get-design-done
 ```
 
-This installs GDD into your `~/.claude/` directory, making `/gdd:*` commands available in all projects.
+This walks you through choosing global (`~/.claude/`, all projects) or local (`./.claude/`, this project only).
 
-For a single project:
+For CI or non-interactive use, pass flags directly:
 
 ```bash
-npx get-design-done --local
+npx get-design-done --global   # all projects
+npx get-design-done --local    # this project only
 ```
 
 ## Quick Start

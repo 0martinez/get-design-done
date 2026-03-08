@@ -9,3 +9,7 @@ node_modules/
 
 # Per-project design artifacts (created by /gdd:new-design)
 .design/
+
+# Installer artifacts
+gdd-file-manifest.json
+gdd-local-patches/

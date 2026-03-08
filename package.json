@@ -11,8 +11,12 @@
     "commands/",
     "agents/",
     "get-design-done/",
-    "hooks/"
+    "package.json"
   ],
+  "homepage": "https://github.com/0martinez/get-design-done#readme",
+  "bugs": {
+    "url": "https://github.com/0martinez/get-design-done/issues"
+  },
   "engines": {
     "node": ">=16.7.0"
   },
