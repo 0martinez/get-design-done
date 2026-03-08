@@ -1,6 +1,6 @@
 {
   "name": "get-design-done",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A meta-prompting, context engineering and design system framework for Claude Code. The design counterpart to get-shit-done.",
   "license": "MIT",
   "author": "0martinez",
