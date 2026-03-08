@@ -80,6 +80,8 @@ Grade A or verdict=proceed with no token-fix/render-fix issues.
 ```
 Phase {{PHASE_NUM}} critique: Grade [X] — [verdict]
 Next: /gdd:explore-phase {{NEXT_PHASE}}
+
+Tip: Run /clear before starting the next phase to free up context. Your progress is saved — use /gdd:resume-work to restore it.
 ```
 
 ### Path B — Fixable issues exist
@@ -129,7 +131,7 @@ Build the options list from the issues table. Prefix each label with `[token]` o
    - Suggest next action:
      - If only token fixes applied → "Re-render to pick up token changes: /gdd:render-phase {{PHASE_NUM}}"
      - If render fixes applied → "Re-critique to verify: /gdd:critique-phase {{PHASE_NUM}}"
-     - If all issues resolved → "Proceed to next phase: /gdd:explore-phase {{NEXT_PHASE}}"
+     - If all issues resolved → "Proceed to next phase: /gdd:explore-phase {{NEXT_PHASE}}\n\nTip: Run /clear before starting the next phase to free up context. Your progress is saved — use /gdd:resume-work to restore it."
 
 ### Path C — Major revision needed
 
