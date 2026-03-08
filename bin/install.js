@@ -32,8 +32,7 @@ const banner = '\n' +
   '\x1b[38;5;229m   ╚═════╝ ╚═════╝ ╚═════╝' + reset + '\n' +
   '\n' +
   '  Get Design Done ' + dim + 'v' + pkg.version + reset + '\n' +
-  '  A design system framework for Claude Code.\n' +
-  '  The design counterpart to Get Shit Done.\n';
+  '  Spec-driven design for Claude Code.\n';
 
 // ── Helpers ─────────────────────────────────────────────────
 
@@ -294,10 +293,8 @@ function install(isGlobal) {
 
   // 7. Success
   console.log(`\n  ${green}${bold}GDD installed successfully!${reset}`);
-  console.log(`\n  ${yellow}Getting started:${reset}`);
-  console.log(`    1. Open a project in Claude Code`);
-  console.log(`    2. Run ${cyan}/gdd:new-design${reset} to initialize`);
-  console.log(`    3. Run ${cyan}/gdd:help${reset} for all commands\n`);
+  console.log(`\n  Run ${cyan}/gdd:new-design${reset} to start designing.`);
+  console.log(`  Run ${cyan}/gdd:help${reset} for all commands.\n`);
 }
 
 // ── Uninstall ───────────────────────────────────────────────
