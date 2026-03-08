@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A meta-prompting, context engineering and design system framework for Claude Code. The design counterpart to get-shit-done.",
   "license": "MIT",
+  "author": "0martinez",
   "bin": {
     "get-design-done": "bin/install.js"
   },

@@ -1,8 +1,12 @@
 # Get Design Done (GDD)
 
+[![npm](https://img.shields.io/npm/v/get-design-done)](https://www.npmjs.com/package/get-design-done)
+
 A meta-prompting, context engineering and design system framework for [Claude Code](https://claude.ai/claude-code). The design counterpart to [Get Shit Done](https://github.com/gsd-build/get-shit-done).
 
 GDD encodes expert design knowledge and guides developers through the questions a designer would ask — producing design systems and production-quality designs through any MCP-connected design tool.
+
+<!-- TODO: Add demo GIF or screenshot here -->
 
 ## Install
 
@@ -29,6 +33,10 @@ npx get-design-done --local    # this project only
 ```
 
 Then repeat `/gdd:explore-phase N` -> `/gdd:spec-phase N` -> `/gdd:render-phase N` -> `/gdd:critique-phase N` for each phase.
+
+## How It Works
+
+GDD is a collection of specialized agents, reference files, and workflow prompts that run inside Claude Code. When you start a new design, GDD interviews you about your product through concrete visual comparisons — not abstract design jargon. Your answers feed into a structured brief, which agents use to generate a complete design system (`TOKENS.md`) covering colors, typography, spacing, and more. From there, each phase is specified, rendered through your connected design tool via MCP adapters, and reviewed with structured critique. The design knowledge lives in reference files so you don't need any — GDD asks the questions a designer would ask, then builds it for you.
 
 ## What It Does
 
