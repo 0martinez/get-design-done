@@ -2,11 +2,25 @@
 
 [![npm](https://img.shields.io/npm/v/get-design-done)](https://www.npmjs.com/package/get-design-done)
 
-A meta-prompting, context engineering and design system framework for [Claude Code](https://claude.ai/claude-code). The design counterpart to [Get Shit Done](https://github.com/gsd-build/get-shit-done).
+Spec-driven design systems for [Claude Code](https://claude.ai/claude-code).
 
-GDD encodes expert design knowledge and guides developers through the questions a designer would ask — producing design systems and production-quality designs through any MCP-connected design tool.
+Design systems without design expertise — GDD asks the questions a designer would ask, then builds it for you.
 
 <!-- TODO: Add demo GIF or screenshot here -->
+
+## The Problem
+
+You're building a product. You need a design system — colors, typography, spacing, components. You don't have a designer, and design tools assume you already know what you want.
+
+## The Approach
+
+GDD treats design specs as executable blueprints. Your answers to concrete questions become a brief. The brief becomes tokens. Tokens become specs. Specs render deterministic, compliant designs.
+
+```
+Brief -> Tokens -> Spec -> Render -> Critique
+```
+
+Specs aren't documentation. They're programs that produce pixel-accurate designs, verified against the system that generated them.
 
 ## Install
 
@@ -26,41 +40,41 @@ npx get-design-done --local    # this project only
 ## Quick Start
 
 ```
-/gdd:new-design              # Initialize project (brief, research, tokens, roadmap)
-/gdd:spec-phase 1            # Specify the design system
+/gdd:new-design              # Answer questions, get brief + tokens + roadmap
+/gdd:spec-phase 1            # Generate the design system spec
 /gdd:render-phase 1          # Render it in your design tool
-/gdd:critique-phase 1        # Review the design
+/gdd:critique-phase 1        # Structured review with fixes
 ```
 
-Then repeat `/gdd:explore-phase N` -> `/gdd:spec-phase N` -> `/gdd:render-phase N` -> `/gdd:critique-phase N` for each phase.
+Then repeat `explore -> spec -> render -> critique` for each phase.
 
-## How It Works
+## Key Concepts
 
-GDD is a collection of specialized agents, reference files, and workflow prompts that run inside Claude Code. When you start a new design, GDD interviews you about your product through concrete visual comparisons — not abstract design jargon. Your answers feed into a structured brief, which agents use to generate a complete design system (`TOKENS.md`) covering colors, typography, spacing, and more. From there, each phase is specified, rendered through your connected design tool via MCP adapters, and reviewed with structured critique. The design knowledge lives in reference files so you don't need any — GDD asks the questions a designer would ask, then builds it for you.
+### Specs drive everything
 
-## What It Does
+Specs contain token resolutions, layout instructions, and render commands. Not mood boards. Not descriptions. Executable blueprints that a render agent follows step by step.
+
+### Tokens as source of truth
+
+`TOKENS.md` holds every design decision — colors, typography, spacing, shadows, radii. Every render resolves tokens to literal values. Every critique checks compliance. Change a token, re-render, and the system updates.
 
 ### No design jargon
 
-GDD asks concrete questions through visual comparisons — "More like Notion or Linear?" — not abstract terminology. Design expertise stays encoded in reference files that agents load behind the scenes.
+Questions use visual comparisons — "More like Notion or Linear?" — not terminology. Design expertise lives in reference files that agents load behind the scenes. You make decisions; GDD handles the craft.
+
+### Structured critique
+
+8-dimension review (hierarchy, consistency, contrast, typography, spacing, alignment, accessibility, production readiness) with severity ratings and fix types (token-fix, render-fix, spec-fix). Not "looks good" — actionable, categorized feedback.
 
 ### Tool-agnostic via adapters
 
 Adapters are markdown files mapping abstract operations to MCP tool calls. Currently supports:
 
-- **Paper** — full visual rendering on canvas
-- **Pencil** — design generation and editing in `.pen` files
+- **Paper** — visual rendering on canvas
+- **Pencil** — design generation in `.pen` files
 - **Generic** — HTML/CSS spec output (no design tool needed)
 
-Adding a new tool = writing one markdown file. See `get-design-done/adapters/adapter-interface.md`.
-
-### Design system as source of truth
-
-`TOKENS.md` holds every design decision — colors, typography, spacing, shadows, radii. Every render operation resolves tokens to literal CSS values. Every critique checks compliance.
-
-### Structured critique, not pass/fail
-
-Design review evaluates 8 dimensions (hierarchy, consistency, contrast, typography, spacing, alignment, accessibility, production readiness) with severity ratings (critical/major/minor/note).
+Adding a tool = writing one markdown file.
 
 ## Commands
 
